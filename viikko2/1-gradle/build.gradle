@@ -22,3 +22,11 @@ jar {
         attributes 'Main-Class': 'Main'
     }
 }
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13'
+}
