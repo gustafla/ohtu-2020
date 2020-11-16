@@ -38,6 +38,11 @@ public class Stepdefs {
         logInWith(username, password);
     }
 
+    @When("incorrect username {string} and jukka's password {string} are given")
+    public void incorrectUsernameAndJukkasPasswordAreGiven(String username, String password) {
+        logInWith(username, password);
+    }
+
     @Then("user is not logged in and error message is given")
     public void userIsNotLoggedInAndErrorMessageIsGiven() {
         pageHasContent("invalid username or password");
