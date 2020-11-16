@@ -41,6 +41,10 @@ public class Player {
         return goals;
     }
 
+    public int getScore() {
+        return goals + assists;
+    }
+
     public void setPenalties(int penalties) {
         this.penalties = penalties;
     }
@@ -67,6 +71,10 @@ public class Player {
 
     @Override
     public String toString() {
-        return name + " from " + nationality + " team " + team + " goals " + goals + " assists " + assists + " penalties " + penalties + " games " + games;
+        return
+            name + " (" + team + ") " + nationality + " | " +
+            goals + " + " + assists + " = " + getScore() +
+            " | penalties " + penalties +
+            " | games " + games;
     }
 }
