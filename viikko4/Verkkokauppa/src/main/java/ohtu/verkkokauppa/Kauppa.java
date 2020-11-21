@@ -40,7 +40,7 @@ public class Kauppa {
     public boolean tilimaksu(String nimi, String tiliNumero) {
         int viite = viitegeneraattori.uusi();
         int summa = ostoskori.hinta();
-        
+
         return pankki.tilisiirto(nimi, viite, tiliNumero, kaupanTili, summa);
     }
 
