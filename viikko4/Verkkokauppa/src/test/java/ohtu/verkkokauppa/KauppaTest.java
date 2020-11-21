@@ -111,4 +111,16 @@ public class KauppaTest {
 
         verify(viitegeneraattori, times(2)).uusi();
     }
+
+    @Test
+    public void poistaKoristaJaOstoksetTilisiirrolla() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.lisaaKoriin(2);
+        kauppa.poistaKorista(1);
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("poistaja", "1");
+
+        verify(pankki).tilisiirto(eq("poistaja"), eq(42), eq("1"), anyString(), eq(20));
+    }
 }
