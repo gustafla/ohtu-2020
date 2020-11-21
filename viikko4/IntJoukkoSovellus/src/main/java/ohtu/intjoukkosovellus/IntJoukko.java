@@ -4,11 +4,11 @@ package ohtu.intjoukkosovellus;
 public class IntJoukko {
 
     public final static int KAPASITEETTI = 5, // aloitustalukon koko
-                            OLETUSKASVATUS = 5;  // luotava uusi taulukko on 
+                            OLETUSKASVATUS = 5;  // luotava uusi taulukko on
     // näin paljon isompi kuin vanha
     private int kasvatuskoko;     // Uusi taulukko on tämän verran vanhaa suurempi.
-    private int[] ljono;      // Joukon luvut säilytetään taulukon alkupäässä. 
-    private int alkioidenLkm;    // Tyhjässä joukossa alkioiden_määrä on nolla. 
+    private int[] ljono;      // Joukon luvut säilytetään taulukon alkupäässä.
+    private int alkioidenLkm;    // Tyhjässä joukossa alkioiden_määrä on nolla.
 
     public IntJoukko() {
         ljono = new int[KAPASITEETTI];
@@ -31,8 +31,7 @@ public class IntJoukko {
         this.kasvatuskoko = OLETUSKASVATUS;
 
     }
-    
-    
+
     public IntJoukko(int kapasiteetti, int kasvatuskoko) {
         if (kapasiteetti < 0) {
             throw new IndexOutOfBoundsException("Kapasitteetti väärin");//heitin vaan jotain :D
@@ -50,7 +49,6 @@ public class IntJoukko {
     }
 
     public boolean lisaa(int luku) {
-
         int eiOle = 0;
         if (alkioidenLkm == 0) {
             ljono[0] = luku;
@@ -122,7 +120,6 @@ public class IntJoukko {
         return alkioidenLkm;
     }
 
-
     @Override
     public String toString() {
         if (alkioidenLkm == 0) {
@@ -148,7 +145,6 @@ public class IntJoukko {
         }
         return taulu;
     }
-   
 
     public static IntJoukko yhdiste(IntJoukko a, IntJoukko b) {
         IntJoukko x = new IntJoukko();
@@ -177,7 +173,7 @@ public class IntJoukko {
         return y;
 
     }
-    
+
     public static IntJoukko erotus ( IntJoukko a, IntJoukko b) {
         IntJoukko z = new IntJoukko();
         int[] aTaulu = a.toIntArray();
@@ -188,8 +184,7 @@ public class IntJoukko {
         for (int i = 0; i < bTaulu.length; i++) {
             z.poista(bTaulu[i]);
         }
- 
+
         return z;
     }
-        
 }
