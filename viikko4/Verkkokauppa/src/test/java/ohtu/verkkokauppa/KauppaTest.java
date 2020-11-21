@@ -85,4 +85,30 @@ public class KauppaTest {
 
         verify(pankki).tilisiirto(eq("veeti"), eq(42), eq("23456"), anyString(), eq(15));
     }
+
+    @Test
+    public void aloitaAsiointiNollaaEdellisenOstoksen() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("veeti", "23456");
+
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("lauri", "asdf1234");
+
+        verify(pankki).tilisiirto(eq("lauri"), eq(42), eq("asdf1234"), anyString(), eq(5));
+    }
+
+    @Test
+    public void uusiViiteJokaiselleMaksutapahtumalle() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("veeti", "23456");
+
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("lauri", "asdf1234");
+
+        verify(viitegeneraattori, times(2)).uusi();
+    }
 }
