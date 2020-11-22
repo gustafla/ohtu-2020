@@ -25,6 +25,15 @@ public class IntJoukko {
         this(5, 5);
     }
 
+    public boolean kuuluu(int luku) {
+        for (int i = 0; i < koko; i++) {
+            if (luku == luvut[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean lisaa(int luku) {
         int eiOle = 0;
         if (koko == 0) {
@@ -46,20 +55,6 @@ public class IntJoukko {
             return true;
         }
         return false;
-    }
-
-    public boolean kuuluu(int luku) {
-        int on = 0;
-        for (int i = 0; i < koko; i++) {
-            if (luku == luvut[i]) {
-                on++;
-            }
-        }
-        if (on > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public boolean poista(int luku) {
