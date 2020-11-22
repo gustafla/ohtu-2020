@@ -5,42 +5,24 @@ public class IntJoukko {
     private int[] ljono;      // Joukon luvut säilytetään taulukon alkupäässä.
     private int alkioidenLkm;    // Tyhjässä joukossa alkioiden_määrä on nolla.
 
-    public IntJoukko() {
-        ljono = new int[5];
-        for (int i = 0; i < ljono.length; i++) {
-            ljono[i] = 0;
+    public IntJoukko(int kapasiteetti, int kasvatuskoko) {
+        if (kapasiteetti < 0) {
+            throw new IllegalArgumentException("Kapasiteetti ei saa olla negatiivinen");
         }
+        if (kasvatuskoko < 0) {
+            throw new IllegalArgumentException("Kasvatuskoko ei saa olla negatiivinen");
+        }
+        ljono = new int[kapasiteetti]; // Java alustaa taulukot nollilla
         alkioidenLkm = 0;
-        this.kasvatuskoko = 5;
+        this.kasvatuskoko = kasvatuskoko;
     }
 
     public IntJoukko(int kapasiteetti) {
-        if (kapasiteetti < 0) {
-            return;
-        }
-        ljono = new int[kapasiteetti];
-        for (int i = 0; i < ljono.length; i++) {
-            ljono[i] = 0;
-        }
-        alkioidenLkm = 0;
-        this.kasvatuskoko = 5;
-
+        this(kapasiteetti, 5);
     }
 
-    public IntJoukko(int kapasiteetti, int kasvatuskoko) {
-        if (kapasiteetti < 0) {
-            throw new IndexOutOfBoundsException("Kapasitteetti väärin");//heitin vaan jotain :D
-        }
-        if (kasvatuskoko < 0) {
-            throw new IndexOutOfBoundsException("kapasiteetti2");//heitin vaan jotain :D
-        }
-        ljono = new int[kapasiteetti];
-        for (int i = 0; i < ljono.length; i++) {
-            ljono[i] = 0;
-        }
-        alkioidenLkm = 0;
-        this.kasvatuskoko = kasvatuskoko;
-
+    public IntJoukko() {
+        this(5, 5);
     }
 
     public boolean lisaa(int luku) {
