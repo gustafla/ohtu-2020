@@ -84,11 +84,9 @@ public class IntJoukko {
     }
 
     public int[] toIntArray() {
-        int[] taulu = new int[koko];
-        for (int i = 0; i < taulu.length; i++) {
-            taulu[i] = luvut[i];
-        }
-        return taulu;
+        int[] kopio = new int[koko];
+        System.arraycopy(luvut, 0, kopio, 0, koko);
+        return kopio;
     }
 
     public static IntJoukko yhdiste(IntJoukko a, IntJoukko b) {
