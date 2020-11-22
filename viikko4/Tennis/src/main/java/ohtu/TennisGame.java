@@ -22,18 +22,26 @@ public class TennisGame {
         }
     }
 
-    private String sameScore() {
-        switch (player1Score) {
+    private String scoreCall(int score) {
+        switch(score) {
             case 0:
-                return "Love-All";
+                return "Love";
             case 1:
-                return "Fifteen-All";
+                return "Fifteen";
             case 2:
-                return "Thirty-All";
+                return "Thirty";
             case 3:
-                return "Forty-All";
+                return "Forty";
         }
-        return "Deuce";
+        return "Game";
+    }
+
+    private String sameScore() {
+        if (player1Score > 3) {
+            return "Deuce";
+        }
+
+        return scoreCall(player1Score) + "-All";
     }
 
     private String advantageScore() {
@@ -52,10 +60,7 @@ public class TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-
-        if (player1Score==player2Score) {
+        if (player1Score == player2Score) {
             return sameScore();
         }
 
@@ -63,27 +68,6 @@ public class TennisGame {
             return advantageScore();
         }
 
-        for (int i=1; i<3; i++)
-        {
-            if (i==1) tempScore = player1Score;
-            else { score+="-"; tempScore = player2Score;}
-            switch(tempScore)
-            {
-                case 0:
-                    score+="Love";
-                    break;
-                case 1:
-                    score+="Fifteen";
-                    break;
-                case 2:
-                    score+="Thirty";
-                    break;
-                case 3:
-                    score+="Forty";
-                    break;
-            }
-        }
-
-        return score;
+        return scoreCall(player1Score) + "-" + scoreCall(player2Score);
     }
 }
