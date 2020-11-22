@@ -70,16 +70,17 @@ public class IntJoukko {
     public String toString() {
         if (koko == 0) {
             return "{}";
-        } else {
-            String tuotos = "{";
-            for (int i = 0; i < koko - 1; i++) {
-                tuotos += luvut[i];
-                tuotos += ", ";
-            }
-            tuotos += luvut[koko - 1];
-            tuotos += "}";
-            return tuotos;
         }
+
+        StringBuilder tuotos = new StringBuilder("{");
+        for (int i = 0; i < koko - 1; i++) {
+            tuotos.append(luvut[i]);
+            tuotos.append(", ");
+        }
+        tuotos.append(luvut[koko - 1]);
+        tuotos.append("}");
+
+        return tuotos.toString();
     }
 
     public int[] toIntArray() {
