@@ -22,29 +22,26 @@ public class TennisGame {
         }
     }
 
+    private String sameScore(int score) {
+        switch (score) {
+            case 0:
+                return "Love-All";
+            case 1:
+                return "Fifteen-All";
+            case 2:
+                return "Thirty-All";
+            case 3:
+                return "Forty-All";
+        }
+        return "Deuce";
+    }
+
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (player1Score==player2Score)
-        {
-            switch (player1Score)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                case 3:
-                        score = "Forty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-            }
+
+        if (player1Score==player2Score) {
+            return sameScore(player1Score);
         }
         else if (player1Score>=4 || player2Score>=4)
         {
@@ -77,6 +74,7 @@ public class TennisGame {
                 }
             }
         }
+
         return score;
     }
 }
