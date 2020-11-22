@@ -36,22 +36,18 @@ public class IntJoukko {
         return false;
     }
 
-    private void kasvata() {
+    private void sijoitaLuku(int luku) {
         if (koko == luvut.length) {
             int[] suurempiLukutaulukko = new int[koko+kasvatuskoko];
             System.arraycopy(luvut, 0, suurempiLukutaulukko, 0, koko);
             luvut = suurempiLukutaulukko;
         }
-    }
-
-    private void sijoitaLuku(int luku) {
         luvut[koko] = luku;
         koko++;
     }
 
     public boolean lisaa(int luku) {
         if (!kuuluu(luku)) {
-            kasvata();
             sijoitaLuku(luku);
             return true;
         }
@@ -67,7 +63,6 @@ public class IntJoukko {
         for (int luku: toisenLuvut) {
             // Luku ei ole tässä joukossa jos binarySearch on negatiivinen
             if (Arrays.binarySearch(hakutaulukko, luku) < 0) {
-                kasvata();
                 sijoitaLuku(luku);
             }
         }
@@ -139,7 +134,6 @@ public class IntJoukko {
             if (molempienLuvut[i] == molempienLuvut[i + 1]) {
                 // Käytetään IntJoukon sisuskaluja välttääksemme turhat tarkistukset
                 // tämä on OK koska leikkaus on aluksi tyhjä
-                leikkaus.kasvata();
                 leikkaus.sijoitaLuku(molempienLuvut[i]);
             }
         }
@@ -148,16 +142,14 @@ public class IntJoukko {
     }
 
     public static IntJoukko erotus ( IntJoukko a, IntJoukko b) {
-        IntJoukko z = new IntJoukko();
-        int[] aLuvut = a.toIntArray();
+        IntJoukko erotus = new IntJoukko();
+        erotus.lisaaJoukko(a);
+
         int[] bLuvut = b.toIntArray();
-        for (int i = 0; i < aLuvut.length; i++) {
-            z.lisaa(aLuvut[i]);
-        }
         for (int i = 0; i < bLuvut.length; i++) {
-            z.poista(bLuvut[i]);
+            erotus.poista(bLuvut[i]);
         }
 
-        return z;
+        return erotus;
     }
 }
