@@ -55,8 +55,7 @@ public class IntJoukko {
     }
 
     private void lisaaJoukko(IntJoukko toinen) {
-        int[] hakutaulukko = new int[koko];
-        System.arraycopy(luvut, 0, hakutaulukko, 0, koko);
+        int[] hakutaulukko = Arrays.copyOfRange(luvut, 0, koko);
         Arrays.sort(hakutaulukko);
 
         int[] toisenLuvut = toinen.toIntArray();
@@ -104,9 +103,7 @@ public class IntJoukko {
     }
 
     public int[] toIntArray() {
-        int[] kopio = new int[koko];
-        System.arraycopy(luvut, 0, kopio, 0, koko);
-        return kopio;
+        return Arrays.copyOfRange(luvut, 0, koko);
     }
 
     public static IntJoukko yhdiste(IntJoukko a, IntJoukko b) {
@@ -141,7 +138,7 @@ public class IntJoukko {
         return leikkaus;
     }
 
-    public static IntJoukko erotus ( IntJoukko a, IntJoukko b) {
+    public static IntJoukko erotus (IntJoukko a, IntJoukko b) {
         IntJoukko erotus = new IntJoukko();
         erotus.lisaaJoukko(a);
 
