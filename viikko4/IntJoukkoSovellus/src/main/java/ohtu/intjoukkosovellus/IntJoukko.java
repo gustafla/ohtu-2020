@@ -80,8 +80,6 @@ public class IntJoukko {
     public String toString() {
         if (koko == 0) {
             return "{}";
-        } else if (koko == 1) {
-            return "{" + luvut[0] + "}";
         } else {
             String tuotos = "{";
             for (int i = 0; i < koko - 1; i++) {
