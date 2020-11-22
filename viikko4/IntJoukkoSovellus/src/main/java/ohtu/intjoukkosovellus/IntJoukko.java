@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class IntJoukko {
     private int[] luvut;
-    private int koko; // Tyhjässä joukossa alkioiden_määrä on nolla
-    private int kasvatuskoko; // Uusi taulukko on tämän verran vanhaa suurempi
+    private int koko;
+    private int kasvatuskoko;
 
     public IntJoukko(int kapasiteetti, int kasvatuskoko) {
         if (kapasiteetti < 0) {
@@ -14,7 +14,7 @@ public class IntJoukko {
         if (kasvatuskoko < 0) {
             throw new IllegalArgumentException("Kasvatuskoko ei saa olla negatiivinen");
         }
-        luvut = new int[kapasiteetti]; // Java alustaa taulukot nollilla
+        luvut = new int[kapasiteetti];
         koko = 0;
         this.kasvatuskoko = kasvatuskoko;
     }
