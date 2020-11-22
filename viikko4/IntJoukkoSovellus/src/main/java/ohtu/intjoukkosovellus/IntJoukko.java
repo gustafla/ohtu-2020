@@ -35,23 +35,14 @@ public class IntJoukko {
     }
 
     public boolean lisaa(int luku) {
-        int eiOle = 0;
-        if (koko == 0) {
-            luvut[0] = luku;
-            koko++;
-            return true;
-        } else {
-        }
         if (!kuuluu(luku)) {
+            if (koko == luvut.length) {
+                int[] suurempiLukutaulukko = new int[koko+kasvatuskoko];
+                System.arraycopy(luvut, 0, suurempiLukutaulukko, 0, koko);
+                luvut = suurempiLukutaulukko;
+            }
             luvut[koko] = luku;
             koko++;
-            if (koko % luvut.length == 0) {
-                int[] taulukkoOld = new int[luvut.length];
-                taulukkoOld = luvut;
-                kopioiTaulukko(luvut, taulukkoOld);
-                luvut = new int[koko + kasvatuskoko];
-                kopioiTaulukko(taulukkoOld, luvut);
-            }
             return true;
         }
         return false;
@@ -79,13 +70,6 @@ public class IntJoukko {
 
 
         return false;
-    }
-
-    private void kopioiTaulukko(int[] vanha, int[] uusi) {
-        for (int i = 0; i < vanha.length; i++) {
-            uusi[i] = vanha[i];
-        }
-
     }
 
     public int mahtavuus() {
