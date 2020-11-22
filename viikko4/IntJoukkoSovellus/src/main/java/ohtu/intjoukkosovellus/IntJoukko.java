@@ -49,25 +49,15 @@ public class IntJoukko {
     }
 
     public boolean poista(int luku) {
-        int kohta = -1;
-        int apu;
         for (int i = 0; i < koko; i++) {
             if (luku == luvut[i]) {
-                kohta = i; //siis luku löytyy tuosta kohdasta :D
-                luvut[kohta] = 0;
-                break;
+                koko--;
+                for (int j = i; j < koko; j++) {
+                    luvut[j] = luvut[j + 1];
+                }
+                return true;
             }
         }
-        if (kohta != -1) {
-            for (int j = kohta; j < koko - 1; j++) {
-                apu = luvut[j];
-                luvut[j] = luvut[j + 1];
-                luvut[j + 1] = apu;
-            }
-            koko--;
-            return true;
-        }
-
 
         return false;
     }
