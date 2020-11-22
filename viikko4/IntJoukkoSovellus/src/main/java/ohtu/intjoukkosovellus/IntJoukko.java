@@ -58,8 +58,9 @@ public class IntJoukko {
         int[] hakutaulukko = Arrays.copyOfRange(luvut, 0, koko);
         Arrays.sort(hakutaulukko);
 
-        int[] toisenLuvut = toinen.toIntArray();
-        for (int luku: toisenLuvut) {
+        for (int i = 0; i < toinen.koko; i++) {
+            // Vältetään lukujen kopioiminen käyttämällä IntJoukon sisuskaluja
+            int luku = toinen.luvut[i];
             // Luku ei ole tässä joukossa jos binarySearch on negatiivinen
             if (Arrays.binarySearch(hakutaulukko, luku) < 0) {
                 sijoitaLuku(luku);
@@ -115,13 +116,11 @@ public class IntJoukko {
 
     public static IntJoukko leikkaus(IntJoukko a, IntJoukko b) {
         IntJoukko leikkaus = new IntJoukko();
-        int[] aLuvut = a.toIntArray();
-        int[] bLuvut = b.toIntArray();
 
         // Kopioidaan luvut yhteen taulukkoon
-        int[] molempienLuvut = new int[aLuvut.length + bLuvut.length];
-        System.arraycopy(aLuvut, 0, molempienLuvut, 0, aLuvut.length);
-        System.arraycopy(bLuvut, 0, molempienLuvut, aLuvut.length, bLuvut.length);
+        int[] molempienLuvut = new int[a.koko + b.koko];
+        System.arraycopy(a.luvut, 0, molempienLuvut, 0, a.koko);
+        System.arraycopy(b.luvut, 0, molempienLuvut, a.koko, b.koko);
 
         // Laitetaan järjestykseen niin että samat luvut menevät peräkkäin
         Arrays.sort(molempienLuvut);
@@ -142,9 +141,8 @@ public class IntJoukko {
         IntJoukko erotus = new IntJoukko();
         erotus.lisaaJoukko(a);
 
-        int[] bLuvut = b.toIntArray();
-        for (int i = 0; i < bLuvut.length; i++) {
-            erotus.poista(bLuvut[i]);
+        for (int i = 0; i < b.koko; i++) {
+            erotus.poista(b.luvut[i]);
         }
 
         return erotus;
