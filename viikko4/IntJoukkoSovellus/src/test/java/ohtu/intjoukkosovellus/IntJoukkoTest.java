@@ -88,4 +88,20 @@ public class IntJoukkoTest {
         joukko = new IntJoukko();
         assertEquals("{}", joukko.toString());
     }     
+
+    @Test
+    public void yhdisteToimii() {
+        int[] odotettu = {1, 3, 10, 11, 2000};
+
+        IntJoukko joukko2 = new IntJoukko();
+        joukko2.lisaa(1);
+        joukko2.lisaa(10);
+        joukko2.lisaa(11);
+        joukko2.lisaa(2000);
+        joukko2.lisaa(2000);
+
+        int[] yhdisteTaulukko = IntJoukko.yhdiste(joukko, joukko2).toIntArray();
+        Arrays.sort(yhdisteTaulukko);
+        assertArrayEquals(yhdisteTaulukko, odotettu);
+    }
 }

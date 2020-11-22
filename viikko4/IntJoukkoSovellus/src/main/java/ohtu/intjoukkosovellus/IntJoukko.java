@@ -1,5 +1,7 @@
 package ohtu.intjoukkosovellus;
 
+import java.util.Arrays;
+
 public class IntJoukko {
     private int[] luvut;
     private int koko; // Tyhjässä joukossa alkioiden_määrä on nolla
@@ -34,18 +36,38 @@ public class IntJoukko {
         return false;
     }
 
+    private void kasvata() {
+        if (koko == luvut.length) {
+            int[] suurempiLukutaulukko = new int[koko+kasvatuskoko];
+            System.arraycopy(luvut, 0, suurempiLukutaulukko, 0, koko);
+            luvut = suurempiLukutaulukko;
+        }
+    }
+
     public boolean lisaa(int luku) {
         if (!kuuluu(luku)) {
-            if (koko == luvut.length) {
-                int[] suurempiLukutaulukko = new int[koko+kasvatuskoko];
-                System.arraycopy(luvut, 0, suurempiLukutaulukko, 0, koko);
-                luvut = suurempiLukutaulukko;
-            }
+            kasvata();
             luvut[koko] = luku;
             koko++;
             return true;
         }
         return false;
+    }
+
+    private void lisaaJoukko(IntJoukko toinen) {
+        int[] hakutaulukko = new int[koko];
+        System.arraycopy(luvut, 0, hakutaulukko, 0, koko);
+        Arrays.sort(hakutaulukko);
+
+        int[] toisenLuvut = toinen.toIntArray();
+        for (int luku: toisenLuvut) {
+            // Luku ei ole tässä joukossa jos binarySearch on negatiivinen
+            if (Arrays.binarySearch(hakutaulukko, luku) < 0) {
+                kasvata();
+                luvut[koko] = luku;
+                koko++;
+            }
+        }
     }
 
     public boolean poista(int luku) {
@@ -90,16 +112,10 @@ public class IntJoukko {
     }
 
     public static IntJoukko yhdiste(IntJoukko a, IntJoukko b) {
-        IntJoukko x = new IntJoukko();
-        int[] aTaulu = a.toIntArray();
-        int[] bTaulu = b.toIntArray();
-        for (int i = 0; i < aTaulu.length; i++) {
-            x.lisaa(aTaulu[i]);
-        }
-        for (int i = 0; i < bTaulu.length; i++) {
-            x.lisaa(bTaulu[i]);
-        }
-        return x;
+        IntJoukko yhdiste = new IntJoukko(a.mahtavuus() + b.mahtavuus());
+        yhdiste.lisaaJoukko(a);
+        yhdiste.lisaaJoukko(b);
+        return yhdiste;
     }
 
     public static IntJoukko leikkaus(IntJoukko a, IntJoukko b) {
