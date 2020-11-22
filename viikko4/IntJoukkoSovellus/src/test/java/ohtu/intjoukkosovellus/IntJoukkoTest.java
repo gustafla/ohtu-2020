@@ -104,4 +104,34 @@ public class IntJoukkoTest {
         Arrays.sort(yhdisteTaulukko);
         assertArrayEquals(yhdisteTaulukko, odotettu);
     }
+
+    @Test
+    public void leikkausToimii() {
+        int[] odotettu = {1, 2, 3, 9, 10, 2000};
+
+        IntJoukko joukko1 = new IntJoukko();
+        joukko1.lisaa(1);
+        joukko1.lisaa(2);
+        joukko1.lisaa(3);
+        joukko1.lisaa(10);
+        joukko1.lisaa(5);
+        joukko1.lisaa(18);
+        joukko1.lisaa(9);
+        joukko1.lisaa(2000);
+        joukko1.lisaa(2001);
+
+        IntJoukko joukko2 = new IntJoukko();
+        joukko2.lisaa(1);
+        joukko2.lisaa(10);
+        joukko2.lisaa(3);
+        joukko2.lisaa(9);
+        joukko2.lisaa(16);
+        joukko2.lisaa(23);
+        joukko2.lisaa(2);
+        joukko2.lisaa(2000);
+
+        int[] leikkausTaulukko = IntJoukko.leikkaus(joukko1, joukko2).toIntArray();
+        Arrays.sort(leikkausTaulukko);
+        assertArrayEquals(leikkausTaulukko, odotettu);
+    }
 }

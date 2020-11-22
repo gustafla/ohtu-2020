@@ -44,11 +44,15 @@ public class IntJoukko {
         }
     }
 
+    private void sijoitaLuku(int luku) {
+        luvut[koko] = luku;
+        koko++;
+    }
+
     public boolean lisaa(int luku) {
         if (!kuuluu(luku)) {
             kasvata();
-            luvut[koko] = luku;
-            koko++;
+            sijoitaLuku(luku);
             return true;
         }
         return false;
@@ -64,8 +68,7 @@ public class IntJoukko {
             // Luku ei ole tässä joukossa jos binarySearch on negatiivinen
             if (Arrays.binarySearch(hakutaulukko, luku) < 0) {
                 kasvata();
-                luvut[koko] = luku;
-                koko++;
+                sijoitaLuku(luku);
             }
         }
     }
@@ -119,29 +122,40 @@ public class IntJoukko {
     }
 
     public static IntJoukko leikkaus(IntJoukko a, IntJoukko b) {
-        IntJoukko y = new IntJoukko();
-        int[] aTaulu = a.toIntArray();
-        int[] bTaulu = b.toIntArray();
-        for (int i = 0; i < aTaulu.length; i++) {
-            for (int j = 0; j < bTaulu.length; j++) {
-                if (aTaulu[i] == bTaulu[j]) {
-                    y.lisaa(bTaulu[j]);
-                }
+        IntJoukko leikkaus = new IntJoukko();
+        int[] aLuvut = a.toIntArray();
+        int[] bLuvut = b.toIntArray();
+
+        // Kopioidaan luvut yhteen taulukkoon
+        int[] molempienLuvut = new int[aLuvut.length + bLuvut.length];
+        System.arraycopy(aLuvut, 0, molempienLuvut, 0, aLuvut.length);
+        System.arraycopy(bLuvut, 0, molempienLuvut, aLuvut.length, bLuvut.length);
+
+        // Laitetaan järjestykseen niin että samat luvut menevät peräkkäin
+        Arrays.sort(molempienLuvut);
+
+        // Otetaan vain peräkkäiset luvut (eli jotka ovat molemmissa joukoissa)
+        for (int i = 0; i < molempienLuvut.length - 1; i++) {
+            if (molempienLuvut[i] == molempienLuvut[i + 1]) {
+                // Käytetään IntJoukon sisuskaluja välttääksemme turhat tarkistukset
+                // tämä on OK koska leikkaus on aluksi tyhjä
+                leikkaus.kasvata();
+                leikkaus.sijoitaLuku(molempienLuvut[i]);
             }
         }
-        return y;
 
+        return leikkaus;
     }
 
     public static IntJoukko erotus ( IntJoukko a, IntJoukko b) {
         IntJoukko z = new IntJoukko();
-        int[] aTaulu = a.toIntArray();
-        int[] bTaulu = b.toIntArray();
-        for (int i = 0; i < aTaulu.length; i++) {
-            z.lisaa(aTaulu[i]);
+        int[] aLuvut = a.toIntArray();
+        int[] bLuvut = b.toIntArray();
+        for (int i = 0; i < aLuvut.length; i++) {
+            z.lisaa(aLuvut[i]);
         }
-        for (int i = 0; i < bTaulu.length; i++) {
-            z.poista(bTaulu[i]);
+        for (int i = 0; i < bLuvut.length; i++) {
+            z.poista(bLuvut[i]);
         }
 
         return z;
