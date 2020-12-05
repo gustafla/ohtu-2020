@@ -24,7 +24,14 @@ public class QueryBuilder {
         return this;
     }
 
+    public QueryBuilder oneOf(Matcher... matchers) {
+        this.matcher = new Or(matchers);
+        return this;
+    }
+
     public Matcher build() {
-        return matcher;
+        Matcher m = matcher;
+        matcher = new All();
+        return m;
     }
 }
