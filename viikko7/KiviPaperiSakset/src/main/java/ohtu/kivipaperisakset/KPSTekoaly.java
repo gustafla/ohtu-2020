@@ -1,8 +1,11 @@
 package ohtu.kivipaperisakset;
 
 public class KPSTekoaly extends Peli {
+    private Tekoaly tekoaly;
 
-    private static final Tekoaly tekoaly = new Tekoaly();
+    protected KPSTekoaly(Tekoaly tekoaly) {
+        this.tekoaly = tekoaly;
+    }
 
     @Override
     protected String tokanSiirto(String ekanSiirto) {

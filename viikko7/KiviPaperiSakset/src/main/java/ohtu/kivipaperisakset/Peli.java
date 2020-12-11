@@ -5,6 +5,20 @@ import java.util.Scanner;
 public abstract class Peli {
     protected static final Scanner scanner = new Scanner(System.in);
 
+    protected Peli() {
+    }
+
+    public static Peli luoPeli(String valinta) {
+        if (valinta.endsWith("a")) {
+            return new KPSPelaajaVsPelaaja();
+        } else if (valinta.endsWith("b")) {
+            return new KPSTekoaly(new TekoalyPerus());
+        } else if (valinta.endsWith("c")) {
+            return new KPSTekoaly(new TekoalyParannettu(20));
+        }
+        return null;
+    }
+
     public void pelaa() {
         Tuomari tuomari = new Tuomari();
 
