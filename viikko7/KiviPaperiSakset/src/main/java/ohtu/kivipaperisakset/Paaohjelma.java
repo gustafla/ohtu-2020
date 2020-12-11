@@ -16,7 +16,7 @@ public class Paaohjelma {
 
             String vastaus = scanner.nextLine();
 
-            Peli peli = Peli.luoPeli(vastaus);
+            Peli peli = KPSPeli.luoPeli(vastaus);
 
             if (peli == null) {
                 break;

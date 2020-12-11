@@ -1,6 +1,6 @@
 package ohtu.kivipaperisakset;
 
-public class KPSTekoaly extends Peli {
+public class KPSTekoaly extends KPSPeli {
     private Tekoaly tekoaly;
 
     protected KPSTekoaly(Tekoaly tekoaly) {

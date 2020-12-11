@@ -1,6 +1,6 @@
 package ohtu.kivipaperisakset;
 
-public class KPSPelaajaVsPelaaja extends Peli {
+public class KPSPelaajaVsPelaaja extends KPSPeli {
     protected KPSPelaajaVsPelaaja() {
     }
 
